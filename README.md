@@ -13,7 +13,7 @@ AURA-AI/
  run.py       one-command launcher        docker-compose.yml   production stack
 ```
 
-**Live website:** see [DEPLOY.md](DEPLOY.md) (GitHub + Render, free tier, auto-deploys on every push).
+**Live website:** see {https://aura-ai-whm9.onrender.com} (GitHub + Render, free tier, auto-deploys on every push).
 
 ## 1. Local development
 
