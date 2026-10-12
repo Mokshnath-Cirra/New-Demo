@@ -1,0 +1,23 @@
+# Render Blueprint: one Docker web service (API + UI) and a free PostgreSQL database.
+services:
+  - type: web
+    name: aura-ai
+    runtime: docker
+    plan: free
+    healthCheckPath: /api/health
+    envVars:
+      - key: ENVIRONMENT
+        value: production
+      - key: SECRET_KEY
+        generateValue: true
+      - key: REQUIRE_AUTH
+        value: "false"          # set to "true" to require sign-in on the live site
+      - key: DEMO_ADMIN_PASSWORD
+        generateValue: true     # shown in the Render dashboard; used when REQUIRE_AUTH=true
+      - key: DATABASE_URL
+        fromDatabase:
+          name: aura-db
+          property: connectionString
+databases:
+  - name: aura-db
+    plan: free

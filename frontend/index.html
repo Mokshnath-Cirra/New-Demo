@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AURA Predictive AI - Fleet &amp; Machinery Health Suite</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/components.css">
+</head>
+<body>
+<div class="app">
+  <header class="header">
+    <div class="brand">
+      <span class="logo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l1.8 4.7L18.5 9.5l-4.7 1.8L12 16l-1.8-4.7L5.5 9.5l4.7-1.8z"/></svg></span>
+      <div><strong>AURA <b>PREDICTIVE AI</b></strong><small>Enterprise Fleet &amp; Machinery Health Suite</small></div>
+    </div>
+    <div class="header-tools">
+      <button class="icon-btn" id="soundBtn" type="button" aria-pressed="true" aria-label="Toggle alert sound"><svg viewBox="0 0 24 24"><path d="M4 10v4h4l5 4V6L8 10zM16 9a4 4 0 010 6"/></svg></button>
+      <button class="icon-btn" id="printBtn" type="button" aria-label="Print report"><svg viewBox="0 0 24 24"><path d="M7 9V4h10v5M7 17H5v-6h14v6h-2M8 14h8v6H8z"/></svg></button>
+      <button class="icon-btn" id="themeToggle" type="button" aria-label="Toggle dark mode"><svg viewBox="0 0 24 24"><path d="M20 14.5A8 8 0 019.5 4 8 8 0 1020 14.5z"/></svg></button>
+      <button class="icon-btn text" id="authBtn" type="button">Sign in</button>
+      <span class="status-pill" id="statusPill"><i></i><span id="statusText">Standby Mode</span></span>
+    </div>
+  </header>
+
+  <aside class="sidebar">
+    <p class="nav-label">Navigation Menu</p>
+    <nav class="nav" aria-label="Main">
+      <button class="nav-item active" data-view="diagnostics"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="7" height="7" rx="1.5"/><rect x="13" y="4" width="7" height="7" rx="1.5"/><rect x="4" y="13" width="7" height="7" rx="1.5"/><rect x="13" y="13" width="7" height="7" rx="1.5"/></svg><span>Single Unit Diagnostics</span></button>
+      <button class="nav-item" data-view="fleet"><svg viewBox="0 0 24 24"><rect x="4" y="5" width="16" height="6" rx="1.5"/><rect x="4" y="13" width="16" height="6" rx="1.5"/></svg><span>Fleet Overview <em id="fleetCount">(0)</em></span></button>
+      <button class="nav-item" data-view="history"><svg viewBox="0 0 24 24"><ellipse cx="12" cy="6" rx="7" ry="2.5"/><path d="M5 6v6c0 1.4 3.1 2.5 7 2.5s7-1.1 7-2.5V6M5 12v6c0 1.4 3.1 2.5 7 2.5s7-1.1 7-2.5v-6"/></svg><span>History Audit Logs <em id="historyCount">(0)</em></span></button>
+      <button class="nav-item" data-view="roi"><svg viewBox="0 0 24 24"><path d="M12 4v16M16 8H10.5a2.5 2.5 0 000 5h3a2.5 2.5 0 010 5H8"/></svg><span>ROI &amp; Cost Savings</span></button>
+    </nav>
+  </aside>
+
+  <main class="main">
+    <section class="view active" id="view-diagnostics">
+      <div class="card hw-card">
+        <div class="card-head"><span class="mini-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="6" r="2.5"/><circle cx="6" cy="17" r="2.5"/><circle cx="18" cy="17" r="2.5"/><path d="M12 8.5v3M8 15l3-3.5M16 15l-3-3.5"/></svg></span><div><h2>Real Machinery Hardware Integration</h2><p class="sub">Connect physical factory machine via IP &amp; IoT Gateway</p></div></div>
+        <div class="hw-row">
+          <select id="machineSelect" aria-label="Machine"></select>
+          <input id="ipInput" value="192.168.1.50" inputmode="decimal" autocomplete="off" aria-label="IP address">
+          <select id="protoSelect" aria-label="Protocol"><option>OPC-UA</option><option>MQTT</option></select>
+          <button class="btn" id="connectBtn" type="button">Connect Machine</button>
+        </div>
+      </div>
+
+      <div class="kpis">
+        <article class="card kpi"><div class="kpi-head"><h3>Operating Efficiency</h3><svg class="k-ico" viewBox="0 0 24 24"><path d="M4 16l5-5 4 4 7-8M15 7h5v5"/></svg></div><p class="big" id="effValue">98.4%</p><p class="cap">Optimized throughput rate</p></article>
+        <article class="card kpi"><div class="kpi-head"><h3>Estimated Remaining Use (RUL)</h3><svg class="k-ico" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M12 8v4l3 2"/></svg></div><p class="big" id="rulValue">--</p><p class="cap">Predictive maintenance window</p></article>
+        <article class="card kpi"><div class="kpi-head"><h3>Machine Health Status</h3><svg class="k-ico" viewBox="0 0 24 24"><path d="M12 3l7 3v5c0 4.5-3 8-7 10-4-2-7-5.5-7-10V6z"/></svg></div><p class="big status" id="healthText">NORMAL</p><p class="cap" id="engineNote">Physics &amp; Model Analysis</p></article>
+      </div>
+
+      <div class="split">
+        <section class="card">
+          <h2>Sensor Input Parameters</h2><p class="sub" id="sensorSub">Manual override sliders</p>
+          <label class="field">Product quality
+            <select id="qualityType"><option value="L">Low (L)</option><option value="M" selected>Medium (M)</option><option value="H">High (H)</option></select>
+          </label>
+          <div id="sensorList"></div>
+          <div class="actions"><button class="outline" id="calibrateBtn" type="button"><svg viewBox="0 0 24 24"><path d="M20 12a8 8 0 11-2.3-5.7M20 4v5h-5"/></svg>Calibrate</button><button class="btn" id="evalBtn" type="button"><svg viewBox="0 0 24 24"><path d="M8 5l11 7-11 7z"/></svg><span>Evaluate Risk</span></button></div>
+        </section>
+        <section class="card">
+          <div class="card-head spread"><div><h2>Diagnostic Analytics</h2><p class="sub">Exact Backend Calculation Output</p></div><span class="tag" id="aiTag">Backend AI Active</span></div>
+          <div id="diagBody" class="await"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M15.5 8.5l-2 5-5 2 2-5z"/></svg><h3>Awaiting Evaluation</h3><p>Click "Evaluate Risk" to process current sensor values through backend formulas.</p></div>
+        </section>
+      </div>
+    </section>
+
+    <section class="view" id="view-fleet">
+      <div class="stats" id="fleetStats"></div>
+      <div class="fleet-grid" id="fleetGrid"></div>
+    </section>
+
+    <section class="view" id="view-history">
+      <div class="card narrow">
+        <div class="card-head spread"><div><h2>Prediction &amp; Audit History</h2><p class="sub">Log trail of evaluated risk runs</p></div><span class="tag">Secure Storage</span></div>
+        <div class="table-wrap"><table><thead><tr><th>Timestamp</th><th>Equipment ID</th><th>Risk Probability</th><th>Status</th></tr></thead><tbody id="historyRows"></tbody></table></div>
+      </div>
+    </section>
+
+    <section class="view" id="view-roi">
+      <div class="card narrow">
+        <div class="card-head spread"><div><h2>Predictive Maintenance ROI Calculator</h2><p class="sub">Estimated financial savings through automated failure prevention</p></div><span class="tag">Business Impact</span></div>
+        <dl class="roi" id="roiRows"></dl>
+        <ul class="plain" id="roiNotes"></ul>
+      </div>
+    </section>
+  </main>
+</div>
+
+<div class="modal" id="connectModal" hidden><div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="connectTitle">
+  <div class="tick"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></div>
+  <h2 id="connectTitle">Machine connected</h2><p id="connectText"></p>
+  <button class="btn" data-close type="button">Continue</button></div></div>
+
+<div class="modal" id="loginModal" hidden><form class="modal-card" id="loginForm" aria-labelledby="loginTitle">
+  <h2 id="loginTitle">Sign in</h2>
+  <label class="field">Username<input id="loginUser" autocomplete="username" required></label>
+  <label class="field">Password<input id="loginPass" type="password" autocomplete="current-password" required></label>
+  <p class="form-error" id="loginError" role="alert"></p>
+  <div class="actions"><button class="outline" data-close type="button">Cancel</button><button class="btn" type="submit">Sign in</button></div></form></div>
+
+<div class="toasts" id="toasts" aria-live="polite"></div>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
+<script src="js/api.js"></script>
+<script src="js/gauge.js"></script>
+<script src="js/charts.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,11 @@
+[
+  "type_encoded",
+  "air_temp",
+  "process_temp",
+  "rpm",
+  "torque",
+  "tool_wear",
+  "temp_delta",
+  "power_w",
+  "osi"
+]
